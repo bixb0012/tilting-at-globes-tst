@@ -1,0 +1,55 @@
+<meta charset="UTF-8">
+
+<link href="css/gnDefault.css" rel="stylesheet" type="text/css" />
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeDefault.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="scripts/shCore.js"></script>
+<script type="text/javascript" src="scripts/shBrushPython.js"></script>
+<script type="text/javascript" src="scripts/shBrushSql.js"></script>
+<script>SyntaxHighlighter.all();</script>
+
+<title>What's in a Name:  When in_memory = I... | Tilting at Globes</title>
+<body class="gn">
+<table style="margin-left:0%; border-style:none; width:100%;font-family:arial;"><tr>
+<td style="border-style:none;padding:7px;width:50px;">
+<img style="max-height:50px;max-width:50px;" src="images/diy_72.png"/></td>
+<td style="border-style:none;"><p>
+<span style="line-height:1.0;font-size:26px;">
+What's in a Name:  When in_memory = In-memory
+</span></p><p><span style="font-size:115%; color:#8B8B8B;">
+Posted by <a style="color:#3778C7;" href="https://geonet.esri.com/people/bixb0012">Joshua Bixby</a> Aug 1, 2014</span></p>
+</td>
+</tr></table>
+<p><em>This is the first in a four-part series on the challenges of naming new features in software applications; particularly, the consequences when naming falls short.  The <strong>first part in the series</strong> looks at a case when the name of a new feature clearly and succinctly describes the behavior of that feature.  The <a href="http://geonet.esri.com/blogs/tilting/2014/08/02/whats-in-a-name-when-inmemory-in-memory">second part in the series</a> looks at that same case when newer yet functionality alters the original behavior of that new functionality.  The <a href="http://geonet.esri.com/blogs/tilting/2014/08/13/whats-in-a-name-when-inmemory">third part in the series</a> looks at how the documentation has changed to addresses this altered functionality.  And finally, the <a href="http://geonet.esri.com/blogs/tilting/2014/08/15/whats-in-a-name-when-known-unknown">fourth part in the series</a> discusses what it all means to end users and developers.</em></p>
+<p></p>
+<p>When deciding what to call a new feature in a software application, relatively short and relatively descriptive usually win out.  It makes sense, really, who wants to bust out the Help or a super-decoder ring just to get an idea of what a feature might or might not do.  There are risks, however, with trying to be too short or too descriptive.  The former often leads to important qualifiers or fine print being left out, and putting the former and latter together typically lulls users into a false sense of understanding, i.e., assuming what the feature does instead of knowing.  If the act of naming a new feature doesn't pose enough of a challenge, staying true to the name over time poses an even bigger challenge.</p>
+<p></p>
+<p>So why bring up the challenge of naming new features and staying true to those names over time?  Well, because the challenge of staying true to a name has proven too much for at least one feature in ArcGIS, and the handling of the situation has become a failure in and of itself, in my opinion.</p>
+<p></p>
+<p>Back around the time Borat was touring the country learning about American culture, Esri released ArcGIS 9.2 (<a href="http://downloads.esri.com/support/product%20life%20cycle/arcgis_desktop/ArcGIS_PLC.pdf">ArcGIS for Desktop Product Life Cycle Support Status</a>).  <em>Its too bad he didn't swing by the Institute when passing through the Orange Empire, that would have been worth the ticket price alone.  </em>One of the new features introduced in ArcGIS 9.2 was the "in-memory workspace for writing temporary feature classes and tables," which could "greatly improve the performance of models, especially when writing intermediate (scratch) data" (<a href="http://webhelp.esri.com/arcgisdesktop/9.2/pdf/Whats_New_In_ArcGIS_92.pdf">What's New in ArcGIS 9.2</a>).  Needless to say, I was interested.</p>
+<p></p>
+<p>Although I don't have screenshots from that time, fortunately my agency's Wayback Data Center still has ArcGIS 9.2 installed, build 1324 nonetheless!  Let's role the clock back and see the in-memory workspace at its beginnings.</p>
+<p><img alt="arcmap_92_sp0_build_number.PNG" src="images/arcmap_92_sp0_build_number.PNG" /></p>
+<p>After launching ArcMap, I was momentarily thrown by the Command Line.  <em>The Python window didn't replace the Command Line until ArcGIS 9.4, aka ArcGIS 10.0 (<span style="text-decoration: underline;">What's New in ArcGIS 9.4</span> - no link, don't think I can post a copy of the PDF either).</em>  After taking a few minutes to reacquaint myself with the Command Line, it was time to get down to business.  Since this post is about the naming of features and not their performance, we won't need many examples to see whether the new in_memory workspace is really in-memory.</p>
+<p></p>
+<p>One of the simplest examples I can think of is to create a new table in-memory:</p>
+<p><img alt="arcmap_92_command_line_create_table_success.PNG" src="images/arcmap_92_command_line_create_table_success.PNG" /></p>
+<p>So, let's take a look at the Source tab in the Table of Contents:</p>
+<p><img alt="arcmap_92_toc_inmemory_table.PNG" src="images/arcmap_92_toc_inmemory_table.PNG" /></p>
+<p>There it is, a new table in the GPInMemoryWorkspace.  What about creating the same table again:</p>
+<p><img alt="arcmap_92_command_line_create_table_fail.PNG" src="images/arcmap_92_command_line_create_table_fail.PNG" /></p>
+<p>So far, so good.  We expect an error given that the table already exists.  Let's take a look at the Table of Contents after I try deleting the in-memory table:</p>
+<p><img alt="arcmap_92_toc_delete_table.PNG" src="images/arcmap_92_toc_delete_table.PNG" /></p>
+<p>Still going well.  The Delete command works and the in-memory table is gone.</p>
+<p></p>
+<p>Although I won't clutter up the post with more screenshots, I will say creating in-memory feature classes turned out the same way tables did above.  Also, creating in-memory feature classes and tables using ArcToolbox yielded the same results as with the Command Line.</p>
+<p></p>
+<p>Looking for an example that actually involves some data, I loaded a feature class containing the U.S. State boundaries into ArcMap.  A simple Copy Features command using in_memory should do the trick if in-memory workspaces are working as advertised.</p>
+<p><img alt="arcmap_92_toc_inmemory_copyfeatures.PNG" src="images/arcmap_92_toc_inmemory_copyfeatures.PNG" /></p>
+<p>Well, there we are, a copy of the features loaded into an in-memory workspace.</p>
+<p></p>
+<p>The basic examples above are far from a definitive test, but they do show that starting with ArcGIS 9.2 users have the ability to store intermediate data in-memory while working in ArcMap.  Overall, I would have to say the marketroids were right on this one.  The in_memory workspace really is in-memory, at least within the scope of its design.</p>
+<p></p>
+<p>When it comes to the challenge of naming a new feature, I think Esri can claim success with 'in_memory.'  The name is short, descriptive, and most importantly, accurate.  The question or challenge now becomes whether 'in_memory' can remain true to its original functionality as even newer features are introduced with subsequent versions of ArcGIS Desktop.</p>
+</body>
