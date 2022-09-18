@@ -1,0 +1,52 @@
+
+body.gn {
+	font-family: arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.gn a:link {
+	color: #287433;
+	text-decoration: none;
+}
+
+.gn img {
+	margin-left: 5%;
+    max-width: 85%;
+}
+
+.gn table {
+	margin-left: 5%;
+    font-family:  Century Gothic, sans-serif;
+    font-size: 90%;
+	line-height: 1.5;
+	border-collapse: collapse;
+}
+
+.gn th {
+	padding: 2%;
+	text-align: center;
+	vertical-align: bottom;
+	background-color: #f2f2f2;
+}
+
+.gn td {
+	padding: 1%;
+}
+
+.gn table, th, td {
+	border: solid thin #c6c6c6;
+}
+
+/*.gn code {
+	margin-left: 5%;
+    width: 85%;
+	background-color: #F0F0F0;
+    /*font-size: 100%;
+    line-height: 1.25;
+	page-break-inside: avoid;
+}*/
+
+.gn ul ul {
+	page-break-inside: avoid;
+}
